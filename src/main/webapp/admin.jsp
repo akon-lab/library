@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <head>
     <title>Title</title>
@@ -32,6 +34,7 @@
 
         </div>
 
+
         <div id="bookList">
             <div class="mx-auto mb-3">
 
@@ -50,54 +53,48 @@
 
             <h4 class="text-center">Book List:</h4>
             <table class="mx-auto">
+                <thead>
+                <tr>
+                    <th><a href="">Name</a> </th>
+                    <th><a href="">Author</a> </th>
+                    <th><a href="">Copy</a> </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <c:if test="${all!=null}">
+                    <c:forEach items="${all}" var="book">
+                        <tr>
+                            <td><c:out value="${book.title}"/></td>
+                            <td><c:out value="${book.author}"/></td>
+                            <td><c:out value="${book.price}"/></td>
+                            <td>
+                                <a href="">
+                                    <i class='far fa-trash-alt'></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="">
+                                    <i class='fas fa-pen-alt'></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </c:if>
+
 
                 <tr>
-                    <th>id</th>
-                    <th>Name</th>
-                    <th>Author</th>
-                    <th>Copy</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>id</td>
-                    <td>Name</td>
-                    <td>Author</td>
-                    <td>Copy</td>
-                    <td>
-                        <a href="">
-                            <i class='far fa-trash-alt'></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="">
-                            <i class='fas fa-pen-alt'></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>id</td>
-                    <td>Name</td>
-                    <td>Author</td>
-                    <td>Copy</td>
-                    <td>
-                        <a href="">
-                            <i class='far fa-trash-alt'></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="">
-                            <i class='fas fa-pen-alt'></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center" colspan="6" style="border-top: 2px solid  #6cf;">
+                    <td class="text-center" colspan="5" style="border-top: 2px solid  #6cf;">
                         <a href="">
                             <strong>Add</strong>
                         </a>
                     </td>
                 </tr>
+
+                </tbody>
+
             </table>
         </div>
 
@@ -120,19 +117,23 @@
 
             <h4 class="text-center">Readers List:</h4>
             <table class="mx-auto">
-
+                <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Email</th>
                     <th>Count of book</th>
                     <th></th>
                     <th></th>
                 </tr>
+                </thead>
+                <tbody>
                 <tr>
                     <td>
                         <a href="">
-                           Name
-                       </a>
+                            Name long long
+                        </a>
                     </td>
+                    <td>Email</td>
                     <td>Count</td>
                     <td>
                         <a href="">
@@ -148,9 +149,10 @@
                 <tr>
                     <td>
                         <a href="">
-                           Name
-                       </a>
+                            Name
+                        </a>
                     </td>
+                    <td>Email</td>
                     <td>Count</td>
                     <td>
                         <a href="">
@@ -164,14 +166,17 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="text-center" colspan="4" style="border-top: 2px solid  #6cf;">
+                    <td class="text-center" colspan="5" style="border-top: 2px solid  #6cf;">
                         <a href="">
                             <strong>Add</strong>
                         </a>
                     </td>
                 </tr>
+                </tbody>
+
             </table>
         </div>
+
 
     </div>
 

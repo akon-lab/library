@@ -16,7 +16,7 @@
 
     <div class="login-box">
         <h2>Login</h2>
-        <form>
+        <form action="${pageContext.request.contextPath}/log" method="post">
             <div class="user-box">
                 <input type="text" name="" required="">
                 <label>Username</label>
@@ -25,12 +25,13 @@
                 <input type="password" name="" required="">
                 <label>Password</label>
             </div>
-            <a href="#">
+            <button type="submit">
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span> Submit
-            </a>
+            </button>
+
         </form>
     </div>
 

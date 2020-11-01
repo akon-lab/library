@@ -25,6 +25,15 @@ body {
     color: white;
 }
 
+ul {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
 li {
     padding: 3%;
     list-style: none;

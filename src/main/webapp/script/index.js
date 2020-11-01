@@ -9,3 +9,14 @@
 
      }
  }
+ function addBook(){
+    $.ajax({
+        url:  "/book",
+        type:     "POST",
+        dataType: "html",
+        data: function (){},
+        success: function (){},
+        error: function (){}
+
+    })
+ }

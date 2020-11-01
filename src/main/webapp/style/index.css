@@ -11,7 +11,7 @@ html {
 
 body {
     height: 100%;
-    background: linear-gradient(#141e30, #243b55) center/ cover no-repeat;
+    background: linear-gradient(#141e30, #243b55) center/ cover fixed no-repeat;
 }
 
 .box {
@@ -75,10 +75,28 @@ form .user-box a:hover {
 }
 
 table {
-    width: 90%;
     border-spacing: 5px;
     border-radius: 13px;
     border: 1px solid #6cf;
+    border-collapse: collapse;
+    display: block;
+    overflow-y: scroll;
+    max-height: 180px;
+    min-width: 50%;
+    max-width: 90%;
+}
+
+thead {
+    overflow: auto;
+    width: 100%;
+}
+
+tbody {
+    max-height: 150px;
+}
+
+::-webkit-scrollbar {
+    width: 0;
 }
 
 th,
@@ -89,12 +107,16 @@ td {
 th {
     font-weight: normal;
     font-size: 13px;
-    color: #039;
     text-transform: uppercase;
     border-right: 1px solid #0865c2;
     border-top: 1px solid #0865c2;
     border-left: 1px solid #0865c2;
     border-bottom: 1px solid #fff;
+}
+
+th a {
+    color: #039;
+    transition: ease-in-out 0.3s;
 }
 
 td {
@@ -107,7 +129,9 @@ td a {
     transition: ease-in-out .5s;
 }
 
-td a:hover {
+td a:hover,
+th a:hover {
+    text-decoration: none;
     color: #330867;
     text-shadow: 0 0 5px white, 0 0 5px white, 0 0 30px white, 0 0 70px white;
 }

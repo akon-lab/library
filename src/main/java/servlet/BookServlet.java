@@ -17,6 +17,9 @@ public class BookServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        request.setAttribute("all", bookController.getAll());
+
+        getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
     }
 
     @Override
@@ -34,8 +37,8 @@ public class BookServlet extends HttpServlet {
             }
         }
 
+        request.setAttribute("all", bookController.getAll());
 
-
-        getServletContext().getRequestDispatcher("/product.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
     }
 }
