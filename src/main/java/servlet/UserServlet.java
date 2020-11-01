@@ -17,14 +17,14 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
+        String email = req.getParameter("email");
         String password = req.getParameter("password");
         String fname = req.getParameter("fname");
         String sname = req.getParameter("sname");
 
-        userController.add(new UserModel(username, password, fname, sname) );
+        userController.add(new UserModel(fname + " " +sname,email,password,null ) );
 
-        req.setAttribute("message", message.add("Welcome back " + username + "!"));
+        req.setAttribute("message", message.add("Welcome back " + fname + " " +sname + "!"));
         getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
 
         /*

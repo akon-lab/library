@@ -4,15 +4,15 @@ import db.repository.UserRepository;
 import interface_pac.ControllerInterface;
 import models.UserModel;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class UserController implements ControllerInterface<UserModel> {
 
     private final UserRepository userSql = new UserRepository();
 
     @Override
-    public LinkedList<UserModel> getAll() {
-        return null;
+    public ArrayList<UserModel> getAll() {
+         return userSql.getAll();
     }
 
     @Override

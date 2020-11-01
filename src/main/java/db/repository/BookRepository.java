@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class BookRepository extends ConnectDb implements SqlInterface<BookModel> {
@@ -19,7 +20,7 @@ public class BookRepository extends ConnectDb implements SqlInterface<BookModel>
 
         try {
             String sql = "select * from books " +
-                    "where id = " + id + ";";
+                    "where id = " + id + " limit 1;";
             Statement statement = super.getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
@@ -27,8 +28,6 @@ public class BookRepository extends ConnectDb implements SqlInterface<BookModel>
                         resultSet.getInt("id"),
                         resultSet.getString("author"),
                         resultSet.getString("title"),
-                        resultSet.getString("description"),
-                        resultSet.getString("image"),
                         resultSet.getInt("price")
                 );
             }
@@ -42,8 +41,8 @@ public class BookRepository extends ConnectDb implements SqlInterface<BookModel>
     }
 
     @Override
-    public LinkedList<BookModel> getAll() {
-        LinkedList<BookModel> list = new LinkedList<>();
+    public ArrayList<BookModel> getAll() {
+        ArrayList<BookModel> list = new ArrayList<>();
 
         try {
             String sql = "select * from books ";
@@ -54,8 +53,6 @@ public class BookRepository extends ConnectDb implements SqlInterface<BookModel>
                         resultSet.getInt("id"),
                         resultSet.getString("author"),
                         resultSet.getString("title"),
-                        resultSet.getString("description"),
-                        resultSet.getString("image"),
                         resultSet.getInt("price")
                 ));
             }
@@ -73,9 +70,7 @@ public class BookRepository extends ConnectDb implements SqlInterface<BookModel>
                     "VALUES(?, ?, ?, ?, ?)";
             PreparedStatement stmt = super.getConnection().prepareStatement(sql);
             stmt.setString(1, book.getTitle());
-            stmt.setString(2, book.getDesc());
-            stmt.setString(3, book.getImg());
-            stmt.setInt(4, book.getPrice());
+            stmt.setInt(4, book.getCopy());
             stmt.setString(5, book.getAuthor());
             stmt.execute();
         } catch (SQLException throwable) {
@@ -91,6 +86,32 @@ public class BookRepository extends ConnectDb implements SqlInterface<BookModel>
     @Override
     public void remove(Integer id) {
 
+    }
+
+    @Override
+    public ArrayList<BookModel> search(String word) {
+        ArrayList<BookModel> list = new ArrayList<>();
+
+        try {
+            String sql = "select * from books " +
+                    "where title like '%" + word + "%' " +
+                    "or author like '%" + word + "%' ";
+
+            Statement statement = super.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                list.add(new BookModel(
+                        resultSet.getInt("id"),
+                        resultSet.getString("author"),
+                        resultSet.getString("title"),
+                        resultSet.getInt("price")
+                ));
+            }
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return list;
     }
 
 

@@ -4,20 +4,16 @@ public class BookModel {
     private Integer id;
     private String title;
     private String author;
-    private String desc;
-    private String img;
-    private Integer price;
+    private Integer copy;
 
     public BookModel( ) {
 
     }
-    public BookModel(Integer id, String title, String author, String desc, String img, Integer price) {
+    public BookModel(Integer id, String title, String author,  Integer copy) {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.desc = desc;
-        this.img = img;
-        this.price = price;
+        this.copy = copy;
     }
 
     public Integer getId() {
@@ -32,15 +28,7 @@ public class BookModel {
         return author;
     }
 
-    public String getDesc() {
-        return desc;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public Integer getPrice() {
-        return price;
+    public Integer getCopy() {
+        return copy;
     }
 }

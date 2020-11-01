@@ -2,14 +2,13 @@ package db.repository;
 
 import db.ConnectDb;
 import interface_pac.SqlInterface;
-import models.BookModel;
 import models.UserModel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class UserRepository extends ConnectDb implements SqlInterface<UserModel> {
 
@@ -24,10 +23,11 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
 
             if (resultSet.next()) {
                 userItem = new UserModel(
+                        resultSet.getInt("id"),
                         resultSet.getString("name"),
+                        resultSet.getString("email"),
                         resultSet.getString("password"),
-                        resultSet.getString("fname"),
-                        resultSet.getString("sname")
+                        resultSet.getString("list")
                 );
             }
 
@@ -43,21 +43,43 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
     }
 
     @Override
-    public LinkedList<UserModel> getAll() {
-        return null;
+    public ArrayList<UserModel> getAll() {
+        ArrayList<UserModel> list = new ArrayList<>();
+
+        try {
+            String sql = "select * from users ";
+
+            Statement statement = super.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                list.add(new UserModel(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getString("list")
+                ));
+            }
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+
+        return list;
+
     }
 
     @Override
     public void add(UserModel user) {
         try {
-            String sql = "INSERT INTO users(username,password,fname,sname) " +
+            String sql = "INSERT INTO users(name,email,password,list) " +
                     "VALUES(?, ?, ?, ?)";
             PreparedStatement stmt = super.getConnection().prepareStatement(sql);
 
             stmt.setString(1,user.getName());
-            stmt.setString(2, user.getPassword());
-            stmt.setString(3, user.getFname());
-            stmt.setString(4,user.getSname());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getPassword());
+            stmt.setString(4,user.getStringlist());
 
             stmt.execute();
         } catch (SQLException throwable) {
@@ -75,6 +97,33 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
 
     }
 
+    @Override
+    public ArrayList<UserModel> search(String word) {
+        ArrayList<UserModel> list = new ArrayList<>();
+
+        try {
+            String sql = "select * from users " +
+                    "where name like '%" + word + "%' " +
+                    "or email like '%" + word + "%' ";
+
+            Statement statement = super.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                list.add(new UserModel(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getString("list")
+                ));
+            }
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+
+       return list;
+    }
 
 
 }

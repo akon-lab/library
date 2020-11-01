@@ -4,7 +4,7 @@ import db.repository.BookRepository;
 import interface_pac.ControllerInterface;
 import models.BookModel;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class BookController implements ControllerInterface<BookModel> {
     private BookRepository bookSql = null;
@@ -21,7 +21,7 @@ public class BookController implements ControllerInterface<BookModel> {
 
     //interface method
     @Override
-    public LinkedList<BookModel> getAll() {
+    public ArrayList<BookModel> getAll() {
         return bookSql.getAll();
     }
 
