@@ -1,5 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
+ <!doctype html>
 <html lang="en">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -72,12 +71,12 @@
                         <td><c:out value="${book.author}"/></td>
                         <td><c:out value="${book.copy}"/></td>
                         <td>
-                            <a href="">
+                            <a href="${pageContext.request.contextPath}/book?action=remove&id=<c:out value="${book.id}"/>">
                                 <i class='far fa-trash-alt'></i>
                             </a>
                         </td>
                         <td>
-                            <a href="">
+                            <a href="${pageContext.request.contextPath}/book?action=update&id=<c:out value="${book.id}"/>">
                                 <i class='fas fa-pen-alt'></i>
                             </a>
                         </td>
@@ -88,7 +87,7 @@
 
             <tr>
                 <td class="text-center" colspan="5" style="border-top: 2px solid  #6cf;">
-                    <a href="">
+                    <a href="${pageContext.request.contextPath}/book?action=add">
                         <strong>Add</strong>
                     </a>
                 </td>
@@ -106,10 +105,10 @@
             <form action="" method="GET">
 
                 <div class="user-box mx-auto d-flex justify-content-center">
-                    <input placeholder="Readers" type="text" name="book" required="">
-                    <a href="">
-                        <i class='fas fa-search'></i>
-                    </a>
+                    <input placeholder="Readers" id="searchUser" type="text" name="reader" required="">
+                   <button onclick="searchUser()">
+                       <i class='fas fa-search'></i>
+                   </button>
                 </div>
 
             </form>
@@ -128,70 +127,56 @@
             </tr>
             </thead>
             <tbody>
-            <c:if test="${users!=null}">
-                <c:forEach items="${users}" var="user">
+            <c:if test="${userList!=null}">
+                <c:forEach items="${userList}" var="reader">
                     <tr>
                         <td>
                             <a href="">
-                                <c:out value="${user.name}"/>
+                                <c:out value="${userList.name}"/>
                             </a>
                         </td>
-                        <td><c:out value="${user.email}"/></td>
-                        <td><c:out value="${user.bookList.size()}"/></td>
+                        <td><c:out value="${userList.email}"/></td>
+                        <td><c:out value="${userList.bookList.size()}"/></td>
                         <td>
-                            <a href="">
+                            <a href="${pageContext.request.contextPath}/user?action=remove&id=<c:out value="${userList.id}"/>">
                                 <i class='far fa-trash-alt'></i>
                             </a>
                         </td>
                         <td>
-                            <a href="">
+                            <a href="${pageContext.request.contextPath}/user?action=update&id=<c:out value="${userList.id}"/>">
                                 <i class='fas fa-pen-alt'></i>
                             </a>
                         </td>
                     </tr>
                 </c:forEach>
             </c:if>
-            <tr>
-                <td>
-                    <a href="">
-                        Name long long
-                    </a>
-                </td>
-                <td>Email</td>
-                <td>Count</td>
-                <td>
-                    <a href="">
-                        <i class='far fa-trash-alt'></i>
-                    </a>
-                </td>
-                <td>
-                    <a href="">
-                        <i class='fas fa-pen-alt'></i>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="">
-                        Name
-                    </a>
-                </td>
-                <td>Email</td>
-                <td>Count</td>
-                <td>
-                    <a href="">
-                        <i class='far fa-trash-alt'></i>
-                    </a>
-                </td>
-                <td>
-                    <a href="">
-                        <i class='fas fa-pen-alt'></i>
-                    </a>
-                </td>
-            </tr>
+            <c:if test="${users!=null && readerSearchResult==null}">
+                <c:forEach items="${users}" var="user">
+                    <tr>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/user?action=prof&id=<c:out value="${user.id}"/>">
+                                <c:out value="${user.name}"/>
+                            </a>
+                        </td>
+                        <td><c:out value="${user.email}"/></td>
+                        <td><c:out value="${user.bookList.size()}"/></td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/user?action=remove&id=<c:out value="${user.id}"/>">
+                                <i class='far fa-trash-alt'></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/user?action=update&id=<c:out value="${user.id}"/>">
+                                <i class='fas fa-pen-alt'></i>
+                            </a>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </c:if>
+
             <tr>
                 <td class="text-center" colspan="5" style="border-top: 2px solid  #6cf;">
-                    <a href="">
+                    <a href="${pageContext.request.contextPath}/user?action=add">
                         <strong>Add</strong>
                     </a>
                 </td>
@@ -205,17 +190,4 @@
 </div>
 
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-</body>
-
-</html>
+ <%@include file="/footers/form.jsp"%>

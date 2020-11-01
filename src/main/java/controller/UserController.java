@@ -7,17 +7,22 @@ import models.UserModel;
 import java.util.ArrayList;
 
 public class UserController implements ControllerInterface<UserModel> {
+    private UserRepository userSql = null;
 
-    private final UserRepository userSql = new UserRepository();
+   public UserController() {
+        if (userSql == null) {
+            userSql = new UserRepository();
+        }
+    }
 
     @Override
     public ArrayList<UserModel> getAll() {
-         return userSql.getAll();
+        return userSql.getAll();
     }
 
     @Override
     public UserModel getItemById(Integer id) {
-        return null;
+        return userSql.searchById(id);
     }
 
     @Override
@@ -35,8 +40,10 @@ public class UserController implements ControllerInterface<UserModel> {
         userSql.remove(id);
     }
 
-    public UserModel findUserByUsername(String username) {
-        return userSql.searchUserByUsername(username);
+    @Override
+    public ArrayList<UserModel> serch(String word) {
+        return userSql.search(word);
     }
+
 
 }

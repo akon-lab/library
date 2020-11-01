@@ -1,5 +1,6 @@
 package interface_pac;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface ControllerInterface<T> {
@@ -8,5 +9,6 @@ public interface ControllerInterface<T> {
 
     void add(T item);
     void update(T item);
-    void remove(Integer id);
+    void remove(Integer id) throws SQLException;
+    ArrayList<T> serch(String word);
 }

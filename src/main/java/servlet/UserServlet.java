@@ -1,5 +1,6 @@
 package servlet;
 
+import com.google.gson.Gson;
 import controller.UserController;
 import models.UserModel;
 
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,15 +19,25 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String name = req.getParameter("name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        String fname = req.getParameter("fname");
-        String sname = req.getParameter("sname");
 
-        userController.add(new UserModel(fname + " " +sname,email,password,null ) );
+        String action = req.getParameter("action");
 
-        req.setAttribute("message", message.add("Welcome back " + fname + " " +sname + "!"));
-        getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+        if (action != null) {
+            if (action.equals("update")) {
+                Integer id = Integer.parseInt(req.getParameter("id"));
+                userController.update(new UserModel(id, name, email, password, null));
+
+            } else if (action.equals("add")) {
+                userController.add(new UserModel(name, email, password, null));
+
+            }
+        }
+        req.getRequestDispatcher("admin.jsp").forward(req, resp);
+
 
         /*
         Cookie cookie = new Cookie("user", username);
@@ -36,35 +48,45 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        Integer id = Integer.parseInt(req.getParameter("id"));
 
-        //authorization
-        if (userController.findUserByUsername(username) != null) {
-            UserModel user = userController.findUserByUsername(username);
-            if (user.getPassword().equals(password)) {
-                req.setAttribute("message", message.add("Welcome back " + username + "!"));
-            } else {
-                req.setAttribute("message", message.add("Your password not correct"));
-            }
-        } else {
-            req.setAttribute("message", message.add("Such user not exist"));
-        }
+        String username = req.getParameter("name");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+
 
         String action = req.getParameter("action");
 
         if (action != null) {
             if (action.equals("update")) {
-                userController.update(new UserModel());
+                Integer id = Integer.parseInt(req.getParameter("id"));
+                req.setAttribute("user", userController.getItemById(id));
+                req.getRequestDispatcher("/updateForm/updateReaders.jsp").forward(req, resp);
+
             } else if (action.equals("add")) {
-                userController.add(new UserModel());
+                req.getRequestDispatcher("/addForm/addReaders.jsp").forward(req, resp);
+
             } else if (action.equals("remove")) {
+                Integer id = Integer.parseInt(req.getParameter("id"));
                 userController.remove(id);
+
+            } else if (action.equals("search")) {
+                String reader = req.getParameter("reader");
+                ArrayList<UserModel> users = userController.serch("dil");
+
+                resp.setContentType("text/html;charset=UTF-8");
+                String json = new Gson().toJson(users);
+
+                resp.getWriter().write(json);
+                return;
+
+            } else if (action.equals("prof")) {
+                Integer id = Integer.parseInt(req.getParameter("id"));
+                req.setAttribute("user", userController.getItemById(id));
+                req.getRequestDispatcher("/profile.jsp").forward(req, resp);
+
             }
         }
-
-        getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin.jsp").forward(req, resp);
 
     }
 }

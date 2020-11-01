@@ -12,12 +12,14 @@ import java.util.ArrayList;
 
 public class UserRepository extends ConnectDb implements SqlInterface<UserModel> {
 
-    public UserModel searchUserByUsername(String username) {
+
+    @Override
+    public UserModel searchById(Integer id) {
         UserModel userItem = null;
 
         try {
             String sql = "select * from users " +
-                    "where username = " + username + ";";
+                    "where id = " + id + ";";
             Statement statement = super.getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -36,10 +38,6 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
         }
 
         return userItem;
-    } //in future will be avaiable
-    @Override
-    public UserModel searchById(Integer id) {
-        return null;
     }
 
     @Override
@@ -76,10 +74,10 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
                     "VALUES(?, ?, ?, ?)";
             PreparedStatement stmt = super.getConnection().prepareStatement(sql);
 
-            stmt.setString(1,user.getName());
+            stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPassword());
-            stmt.setString(4,user.getStringlist());
+            stmt.setString(4, user.getStringlist());
 
             stmt.execute();
         } catch (SQLException throwable) {
@@ -88,22 +86,44 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
     }
 
     @Override
-    public void update(UserModel item) {
-
+    public void update(UserModel user) {
+        try {
+            String sql = "UPDATE users SET " +
+                    "name = ?," +
+                    "email = ?," +
+                    "password = ? " +
+                    "where id = " + user.getId();
+            PreparedStatement stmt = super.getConnection().prepareStatement(sql);
+            stmt.setString(1, user.getName());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getPassword());
+            stmt.execute();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     @Override
-    public void remove(Integer id) {
+    public void remove(Integer id)   {
+        String sql = "delete from users where id = ?";
+        try {
+            PreparedStatement stmt = super.getConnection().prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
     }
 
+    //problem
     @Override
     public ArrayList<UserModel> search(String word) {
         ArrayList<UserModel> list = new ArrayList<>();
 
         try {
             String sql = "select * from users " +
-                    "where name like '%" + word + "%' " +
+                    "where name like  '%" + word + "%' " +
                     "or email like '%" + word + "%' ";
 
             Statement statement = super.getConnection().createStatement();
@@ -122,7 +142,7 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
             throwable.printStackTrace();
         }
 
-       return list;
+        return list;
     }
 
 

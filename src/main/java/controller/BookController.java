@@ -1,10 +1,13 @@
 package controller;
 
+import comparators.BookCopyComparator;
 import db.repository.BookRepository;
 import interface_pac.ControllerInterface;
 import models.BookModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class BookController implements ControllerInterface<BookModel> {
     private BookRepository bookSql = null;
@@ -14,10 +17,9 @@ public class BookController implements ControllerInterface<BookModel> {
         if (bookSql == null) {
             bookSql = new BookRepository();
         }
-
     }
 
-    //getter
+
 
     //interface method
     @Override
@@ -45,4 +47,13 @@ public class BookController implements ControllerInterface<BookModel> {
         bookSql.remove(id);
     }
 
+    @Override
+    public ArrayList<BookModel> serch(String word) {
+        return bookSql.search(word);
+    }
+
+    public void sortByCopy(ArrayList<BookModel> books){
+        Comparator copy=new BookCopyComparator();
+        Collections.sort(books,copy);
+    }
 }

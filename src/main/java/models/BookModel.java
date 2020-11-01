@@ -8,6 +8,10 @@ public class BookModel {
 
     public BookModel( ) {
 
+    } public BookModel(String title, String author,  Integer copy) {
+        this.title = title;
+        this.author = author;
+        this.copy = copy;
     }
     public BookModel(Integer id, String title, String author,  Integer copy) {
         this.id = id;

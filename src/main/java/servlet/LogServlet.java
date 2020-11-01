@@ -17,7 +17,19 @@ public class LogServlet extends HttpServlet {
         req.setAttribute("all", bookController.getAll());
         req.setAttribute("users", userController.getAll());
 
-        getServletContext().getRequestDispatcher("/admin.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/admin.jsp").forward(req, resp);  /*
+        //authorization
+        if (userController.findUserByUsername(username) != null) {
+            UserModel user = userController.findUserByUsername(username);
+            if (user.getPassword().equals(password)) {
+                req.setAttribute("message", message.add("Welcome back " + username + "!"));
+            } else {
+                req.setAttribute("message", message.add("Your password not correct"));
+            }
+        } else {
+            req.setAttribute("message", message.add("Such user not exist"));
+        }
+       * */
     }
 
     @Override

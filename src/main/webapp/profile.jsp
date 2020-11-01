@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="en">
 
@@ -18,8 +19,8 @@
 
     <div class="box mx-auto">
         <div class="  mb-3">
-            <h3>Name:</h3>
-            <h4>Email:</h4>
+            <h3>Name: <c:out value="${user.name}"/></h3>
+            <h4>Email: <c:out value="${user.email}"/></h4>
             <div class="row d-flex justify-content-around">
                 <a class="btn">
                     Update
