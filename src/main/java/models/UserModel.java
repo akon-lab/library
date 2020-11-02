@@ -10,7 +10,7 @@ public class UserModel {
     private String password;
 
     private ArrayList<Integer> bookList=new ArrayList<>();
-    private String stringlist;
+    private String stringlist=null;
 
     public UserModel() {
 
@@ -33,7 +33,6 @@ public class UserModel {
         this.name = name;
         this.password = password;
         this.email = email;
-        this.stringlist = setStringList(bookList);
         this.bookList = bookList;
     }
 

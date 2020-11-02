@@ -70,14 +70,13 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
     @Override
     public void add(UserModel user) {
         try {
-            String sql = "INSERT INTO users(name,email,password,list) " +
-                    "VALUES(?, ?, ?, ?)";
+            String sql = "INSERT INTO users(name,email,password) " +
+                    "VALUES(?, ?, ?)";
             PreparedStatement stmt = super.getConnection().prepareStatement(sql);
 
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPassword());
-            stmt.setString(4, user.getStringlist());
 
             stmt.execute();
         } catch (SQLException throwable) {

@@ -19,8 +19,6 @@ public class BookController implements ControllerInterface<BookModel> {
         }
     }
 
-
-
     //interface method
     @Override
     public ArrayList<BookModel> getAll() {
@@ -52,8 +50,9 @@ public class BookController implements ControllerInterface<BookModel> {
         return bookSql.search(word);
     }
 
-    public void sortByCopy(ArrayList<BookModel> books){
+    public ArrayList<BookModel>  sortByCopy(ArrayList<BookModel> books){
         Comparator copy=new BookCopyComparator();
         Collections.sort(books,copy);
+        return books;
     }
 }

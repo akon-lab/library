@@ -2,6 +2,7 @@ package servlet;
 
 import com.google.gson.Gson;
 import controller.BookController;
+import controller.UserController;
 import models.BookModel;
 import models.UserModel;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 @WebServlet(name = "BookServlet")
 public class BookServlet extends HttpServlet {
     private final BookController bookController = new BookController();
-
+    private final UserController userController = new UserController();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -38,6 +39,7 @@ public class BookServlet extends HttpServlet {
         }
 
         request.setAttribute("all", bookController.getAll());
+        request.setAttribute("users", userController.getAll());
 
         request.getRequestDispatcher("/admin.jsp").forward(request, response);
     }
