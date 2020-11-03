@@ -84,6 +84,11 @@ public class UserServlet extends HttpServlet {
                 req.setAttribute("user", userController.getItemById(id));
                 req.getRequestDispatcher("/profile.jsp").forward(req, resp);
 
+            }else if (action.equals("removeFromList")){
+                Integer book_id = Integer.parseInt(req.getParameter("book"));
+                Integer user_id = Integer.parseInt(req.getParameter("user"));
+                userController.removeBookFromUsersList(book_id,user_id);
+
             }
         }
         req.getRequestDispatcher("/admin.jsp").forward(req, resp);

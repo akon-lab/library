@@ -9,7 +9,8 @@ import java.util.ArrayList;
 public class UserController implements ControllerInterface<UserModel> {
     private UserRepository userSql = null;
 
-   public UserController() {
+
+    public UserController() {
         if (userSql == null) {
             userSql = new UserRepository();
         }
@@ -23,6 +24,10 @@ public class UserController implements ControllerInterface<UserModel> {
     @Override
     public UserModel getItemById(Integer id) {
         return userSql.searchById(id);
+    }
+
+    public UserModel getUserByEmail(String email) {
+        return userSql.searchByEmail(email);
     }
 
     @Override
@@ -45,5 +50,8 @@ public class UserController implements ControllerInterface<UserModel> {
         return userSql.search(word);
     }
 
+    public void removeBookFromUsersList(Integer bookId, Integer userId) {
+        userSql.updateStrList( userSql.searchById(userId).getStringlist().replace(bookId.toString(), ""),userId);
 
+    }
 }

@@ -1,24 +1,4 @@
- <!doctype html>
-<html lang="en">
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <script src="./script/index.js"></script>
-    <!--icons-->
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <!--CSS-->
-    <link rel="stylesheet" href="./style/index.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-
-<body>
+<%@include file="headers/admin.jsp"%>
 
 <div class="box mx-auto my-5">
 

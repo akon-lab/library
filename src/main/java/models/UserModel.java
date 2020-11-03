@@ -1,7 +1,8 @@
 package models;
 
+import models.builders.UserBuilder;
+
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class UserModel {
     private Integer id;
@@ -9,8 +10,10 @@ public class UserModel {
     private String email;
     private String password;
 
-    private ArrayList<Integer> bookList=new ArrayList<>();
-    private String stringlist=null;
+    private ArrayList<BookModel> bookList = new ArrayList<>();
+    private String stringlist = null;
+
+    private final UserBuilder userBuilder = new UserBuilder();
 
     public UserModel() {
 
@@ -24,12 +27,10 @@ public class UserModel {
         this.email = email;
         this.stringlist = list;
         bookList = setBookList(list);
-
-
     }
 
     //for save data to db
-    public UserModel(String name, String email, String password, ArrayList<Integer> bookList) {
+    public UserModel(String name, String email, String password, ArrayList<BookModel> bookList) {
         this.name = name;
         this.password = password;
         this.email = email;
@@ -38,21 +39,14 @@ public class UserModel {
 
     //setter
     //из стринга в лист
-    private ArrayList<Integer> setBookList(String listOfNum) {
-        if (listOfNum!=null){
-            bookList = new ArrayList<>();
-            for (String str : listOfNum.trim().split(" ")) {
-                bookList.add(Integer.parseInt(str));
-            }
-        }
+    private ArrayList<BookModel> setBookList(String listOfNum) {
+        return userBuilder.setBookList(listOfNum);
 
-        return null;
     }
 
     //перезаписать лист инт книгок на стринг
     public String setStringList(ArrayList<Integer> booksList) {
-        stringlist = booksList.stream().map(String::valueOf).collect(Collectors.joining(" "));
-        return stringlist;
+         return userBuilder.setStringList(booksList);
 
     }
 
@@ -73,7 +67,7 @@ public class UserModel {
         return password;
     }
 
-    public ArrayList<Integer> getBookList() {
+    public ArrayList<BookModel> getBookList() {
         return bookList;
     }
 

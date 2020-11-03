@@ -12,6 +12,31 @@ import java.util.ArrayList;
 
 public class UserRepository extends ConnectDb implements SqlInterface<UserModel> {
 
+    public UserModel searchByEmail(String email) {
+        UserModel userItem = new UserModel();
+
+        try {
+            String sql = "select * from users " +
+                    "where email = " + email + ";";
+            Statement statement = super.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                userItem = new UserModel(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getString("list")
+                );
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+
+        return userItem;
+    }
+
 
     @Override
     public UserModel searchById(Integer id) {
@@ -96,6 +121,20 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPassword());
+            stmt.execute();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    public void updateStrList(String newList,Integer id) {
+        try {
+            String sql = "UPDATE users SET " +
+                    "list = ?," +
+                    "where id = ?";
+            PreparedStatement stmt = super.getConnection().prepareStatement(sql);
+            stmt.setString(1, newList);
+            stmt.setInt(2, id );
             stmt.execute();
         } catch (SQLException throwable) {
             throwable.printStackTrace();
