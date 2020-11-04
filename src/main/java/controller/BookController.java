@@ -1,58 +1,45 @@
 package controller;
 
-import comparators.BookCopyComparator;
-import db.repository.BookRepository;
-import interface_pac.ControllerInterface;
 import models.BookModel;
+import services.BookService;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
-public class BookController implements ControllerInterface<BookModel> {
-    private BookRepository bookSql = null;
+public class BookController  {
+    private BookService bookService = null;
 
 
     public BookController() {
-        if (bookSql == null) {
-            bookSql = new BookRepository();
+        if (bookService == null) {
+            bookService = new BookService();
         }
     }
 
-    //interface method
-    @Override
     public ArrayList<BookModel> getAll() {
-        return bookSql.getAll();
+        return bookService.getBookList();
     }
 
-    @Override
     public BookModel getItemById(Integer id) {
-        return bookSql.searchById(id);
+        return bookService.getItemById(id);
     }
 
-    @Override
     public void add(BookModel item) {
-        bookSql.add(item);
+        bookService.add(item);
     }
 
-    @Override
     public void update(BookModel item) {
-        bookSql.update(item);
+        bookService.update(item);
     }
 
-    @Override
     public void remove(Integer id) {
-        bookSql.remove(id);
+        bookService.remove(id);
     }
 
-    @Override
     public ArrayList<BookModel> serch(String word) {
-        return bookSql.search(word);
+        return bookService.search(word);
     }
 
     public ArrayList<BookModel>  sortByCopy(ArrayList<BookModel> books){
-        Comparator copy=new BookCopyComparator();
-        Collections.sort(books,copy);
-        return books;
+        return bookService.sortByCopy(books);
     }
 }

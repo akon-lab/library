@@ -40,11 +40,11 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
 
     @Override
     public UserModel searchById(Integer id) {
-        UserModel userItem = null;
+        UserModel userItem = new UserModel();
 
         try {
             String sql = "select * from users " +
-                    "where id = " + id + ";";
+                    "where id = " + id + " limit 1;";
             Statement statement = super.getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -57,7 +57,7 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
                         resultSet.getString("list")
                 );
             }
-
+            return userItem;
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
@@ -131,7 +131,7 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
         try {
             String sql = "UPDATE users SET " +
                     "list = ?," +
-                    "where id = ?";
+                    "where id = ? limit 1";
             PreparedStatement stmt = super.getConnection().prepareStatement(sql);
             stmt.setString(1, newList);
             stmt.setInt(2, id );

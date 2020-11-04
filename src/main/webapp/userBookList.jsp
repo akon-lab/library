@@ -1,30 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ak_he
-  Date: 03.11.2020
-  Time: 12:30
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!doctype html>
-<html lang="en">
-
-<head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <script src="./script/index.js"></script>
-    <!--icons-->
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <!--CSS-->
-    <link rel="stylesheet" href="./style/index.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-
-<body>
+<%@include file="headers/admin.jsp"%>
 
 <div class="box mx-auto my-5 ">
 
@@ -56,11 +30,25 @@
             </thead>
 
             <tbody>
+            <c:if test="${all!=null}">
+                <c:forEach items="${all}" var="book">
+                    <tr>
+                        <td><c:out value="${book.title}"/></td>
+                        <td><c:out value="${book.author}"/></td>
+                        <td>
+                            <input type="checkbox" value="<c:out value="${book.id}"/>" name="" id="">
+                        </td>
+
+                    </tr>
+                </c:forEach>
+            </c:if>
+
+
             <tr>
                 <td>Name long</td>
                 <td>Author long</td>
                 <td>
-                    <input type="checkbox" name="" id="">
+                    <input type="checkbox" name="" >
                 </td>
 
             </tr>
@@ -68,39 +56,7 @@
                 <td>Name long</td>
                 <td>Author long</td>
                 <td>
-                    <input type="checkbox" name="" id="">
-                </td>
-
-            </tr>
-            <tr>
-                <td>Name long</td>
-                <td>Author long</td>
-                <td>
-                    <input type="checkbox" name="" id="">
-                </td>
-
-            </tr>
-            <tr>
-                <td>Name long</td>
-                <td>Author long</td>
-                <td>
-                    <input type="checkbox" name="" id="">
-                </td>
-
-            </tr>
-            <tr>
-                <td>Name long</td>
-                <td>Author long</td>
-                <td>
-                    <input type="checkbox" name="" id="">
-                </td>
-
-            </tr>
-            <tr>
-                <td>Name long</td>
-                <td>Author long</td>
-                <td>
-                    <input type="checkbox" name="" id="">
+                    <input type="checkbox" name="" >
                 </td>
 
             </tr>
@@ -111,10 +67,10 @@
 
 
     </div>
-    <a style="width: 40%;" class="btn mx-auto d-flex justify-content-center">
+    <a style="width: 40%;" onclick="checkbox()" class="btn mx-auto d-flex justify-content-center">
         Add books
     </a>
 
 </div>
 
-<%@include file=" footers/form.jsp" %>
+<%@include file="footers/form.jsp" %>

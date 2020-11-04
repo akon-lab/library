@@ -2,14 +2,12 @@ package servlet;
 
 import controller.BookController;
 import controller.UserController;
-import models.UserModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class LogServlet extends HttpServlet {
     private final UserController userController = new UserController();

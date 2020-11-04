@@ -1,4 +1,4 @@
-<%@include file="headers/admin.jsp"%>
+<%@include file="headers/profile.jsp"%>
 
     <div class="box mx-auto">
         <div class="  mb-3">
@@ -40,11 +40,11 @@
                     </a>
                 </li>
                 <li class="text-center">
-                    <a href="">
+                    <a href="${pageContext.request.contextPath}/book?action=listBook&id=<c:out value="${user.id}"/>">
                         <strong>Add book</strong>
                     </a>
                 </li>
             </ul>
         </div>
     </div>
-<%@include file=" footers/form.jsp" %>
+<%@include file="footers/form.jsp" %>

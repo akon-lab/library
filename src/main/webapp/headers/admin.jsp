@@ -8,7 +8,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!--jquery-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!--Js-->
     <script src="./script/index.js"></script>
+
     <!--icons-->
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <!--CSS-->

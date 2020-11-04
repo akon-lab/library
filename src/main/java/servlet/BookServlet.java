@@ -71,6 +71,11 @@ public class BookServlet extends HttpServlet {
 
                 response.getWriter().write(json);
                 return;
+            }else if (action.equals("listBook")){
+                Integer id = Integer.parseInt(request.getParameter("id"));
+                request.setAttribute("all", bookController.getAll());
+
+                request.getRequestDispatcher("/userBookList.jsp").forward(request, response);
             }
         }
 

@@ -28,6 +28,22 @@ function searchUser() {
     xhttp.send("action=search&reader=" + word);
 }
 
+function checkbox() {
+    var checkbox;
+    var str = "";
+
+    checkbox = document.getElementsByName("co");
+
+    for (var i = 0; i < checkbox.length; i++) {
+        if (checkbox[i].checked) {
+            str += checkbox[i].value + " ";
+        }
+    }
+
+    alert(str);
+
+}
+
 function addBook() {
     $.ajax({
         url: "/book",

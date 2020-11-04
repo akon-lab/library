@@ -12,19 +12,20 @@ public class UserBuilder {
     //setter
     //из стринга в лист
     public UserBuilder() {
-        if (bookSql != null) {
+        if (bookSql == null) {
             bookSql = new BookRepository();
         }
     }
 
     public ArrayList<BookModel> setBookList(String listOfNum) {
-        ArrayList<BookModel> bookList = new ArrayList<>();
+        ArrayList<BookModel> bookList = null;
 
         if (listOfNum != null) {
             bookList = new ArrayList<>();
-            for (String str : listOfNum.trim().split(" ")) {
+            for (String str : listOfNum.split(" ")) {
                 bookList.add(bookSql.searchById(Integer.parseInt(str)));
             }
+            return bookList;
         }
 
         return bookList;

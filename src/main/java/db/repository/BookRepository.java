@@ -16,7 +16,7 @@ public class BookRepository extends ConnectDb implements SqlInterface<BookModel>
     @Override
     public BookModel searchById(Integer id) {
 
-        BookModel item = new BookModel();
+        BookModel item = null;
 
         try {
             String sql = "select * from books " +
@@ -26,8 +26,8 @@ public class BookRepository extends ConnectDb implements SqlInterface<BookModel>
             if (resultSet.next()) {
                 item = new BookModel(
                         resultSet.getInt("id"),
-                        resultSet.getString("author"),
                         resultSet.getString("title"),
+                        resultSet.getString("author"),
                         resultSet.getInt("price")
                 );
             }

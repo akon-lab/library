@@ -10,7 +10,7 @@ public class UserModel {
     private String email;
     private String password;
 
-    private ArrayList<BookModel> bookList = new ArrayList<>();
+    private ArrayList<BookModel> bookList = null;
     private String stringlist = null;
 
     private final UserBuilder userBuilder = new UserBuilder();
