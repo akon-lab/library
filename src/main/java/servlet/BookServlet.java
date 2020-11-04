@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import controller.BookController;
 import controller.UserController;
 import models.BookModel;
-import models.UserModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

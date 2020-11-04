@@ -18,10 +18,9 @@ public class UserBuilder {
     }
 
     public ArrayList<BookModel> setBookList(String listOfNum) {
-        ArrayList<BookModel> bookList = null;
+        ArrayList<BookModel> bookList = new ArrayList<>();
 
         if (listOfNum != null) {
-            bookList = new ArrayList<>();
             for (String str : listOfNum.split(" ")) {
                 bookList.add(bookSql.searchById(Integer.parseInt(str)));
             }

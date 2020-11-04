@@ -30,36 +30,18 @@
             </thead>
 
             <tbody>
+
             <c:if test="${all!=null}">
                 <c:forEach items="${all}" var="book">
                     <tr>
                         <td><c:out value="${book.title}"/></td>
                         <td><c:out value="${book.author}"/></td>
                         <td>
-                            <input type="checkbox" value="<c:out value="${book.id}"/>" name="" id="">
+                            <input type="checkbox" value="<c:out value="${book.id}"/>" name="co" id="">
                         </td>
-
                     </tr>
                 </c:forEach>
             </c:if>
-
-
-            <tr>
-                <td>Name long</td>
-                <td>Author long</td>
-                <td>
-                    <input type="checkbox" name="" >
-                </td>
-
-            </tr>
-            <tr>
-                <td>Name long</td>
-                <td>Author long</td>
-                <td>
-                    <input type="checkbox" name="" >
-                </td>
-
-            </tr>
 
             </tbody>
 

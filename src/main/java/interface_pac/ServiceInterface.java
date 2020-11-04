@@ -9,6 +9,5 @@ public interface ServiceInterface<T> {
 
     void add(T item);
     void update(T item);
-    void remove(Integer id) throws SQLException;
     ArrayList<T> search(String word);
 }

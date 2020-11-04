@@ -9,13 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class UserServlet extends HttpServlet {
     private final UserController userController = new UserController();
-    private final Set<String> message = new HashSet<>();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -48,6 +46,8 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
 
         String username = req.getParameter("name");
         String email = req.getParameter("email");
@@ -67,7 +67,12 @@ public class UserServlet extends HttpServlet {
 
             } else if (action.equals("remove")) {
                 Integer id = Integer.parseInt(req.getParameter("id"));
-                userController.remove(id);
+                if (!userController.remove(id)) {
+                    out.write("<script>\n" +
+                            "alert(\"That user didn't return all book\");\n" +
+                            "</script>");
+                }
+
 
             } else if (action.equals("search")) {
                 String reader = req.getParameter("reader");
@@ -84,11 +89,17 @@ public class UserServlet extends HttpServlet {
                 req.setAttribute("user", userController.getItemById(id));
                 req.getRequestDispatcher("/profile.jsp").forward(req, resp);
 
-            }else if (action.equals("removeFromList")){
+            } else if (action.equals("removeFromList")) {
                 Integer book_id = Integer.parseInt(req.getParameter("book"));
                 Integer user_id = Integer.parseInt(req.getParameter("user"));
-                userController.removeBookFromUsersList(book_id,user_id);
+                userController.removeBookFromUsersList(book_id, user_id);
 
+            }else if (action.equals("addToList")) {
+                String listOfBook =  req.getParameter("books");
+                Integer user_id = Integer.parseInt(req.getParameter("user"));
+                userController.addBookIntoUsersList(listOfBook,user_id);
+
+                resp.sendRedirect(req.getHeader("referer"));
             }
         }
         req.getRequestDispatcher("/admin.jsp").forward(req, resp);

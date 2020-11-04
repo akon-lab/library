@@ -1,5 +1,6 @@
+//frontend
 function btn(name) {
-    if (name == bookList) {
+    if (name === bookList) {
         document.getElementById('readersList').style.display = 'none';
         document.getElementById('bookList').style.display = 'block';
 
@@ -10,12 +11,15 @@ function btn(name) {
     }
 }
 
+//backend
+var xhttp = new XMLHttpRequest();
+
 function searchUser() {
-    var xhttp = new XMLHttpRequest();
     var word = document.getElementById('searchUser');
+
     if (word != null) {
         xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState === 4 && this.status === 200) {
                 var userList = JSON.parse(this.responseText);
                 if (userList.length > 0) {
                     var result = xhttp.responseText;
@@ -28,33 +32,35 @@ function searchUser() {
     xhttp.send("action=search&reader=" + word);
 }
 
+function removeUser(count, userId) {
+
+    if (count <= 0 || count === null||count === "") {
+        ///user?action=remove&id=
+        let endpoint = "http://localhost:8080/secret_library_war/user?action=remove&id=";
+        $.ajax({
+            url: endpoint + userId,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function (result) {
+            }
+        })
+    } else {
+        alert("That user didn't return all book");
+    }
+}
+
 function checkbox() {
-    var checkbox;
     var str = "";
 
-    checkbox = document.getElementsByName("co");
+    var checkbox = document.getElementsByName("co");
 
     for (var i = 0; i < checkbox.length; i++) {
         if (checkbox[i].checked) {
             str += checkbox[i].value + " ";
         }
     }
+    xhttp.open("GET", "", true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send("action=addToList&books=" + str);
 
-    alert(str);
-
-}
-
-function addBook() {
-    $.ajax({
-        url: "/book",
-        type: "POST",
-        dataType: "html",
-        data: function () {
-        },
-        success: function () {
-        },
-        error: function () {
-        }
-
-    })
 }

@@ -1,17 +1,21 @@
 package controller;
 
 import models.UserModel;
+import services.BookService;
 import services.UserService;
 
 import java.util.ArrayList;
 
-public class UserController   {
+public class UserController {
     private UserService userService = null;
-
+    private BookService bookService = null;
 
     public UserController() {
         if (userService == null) {
             userService = new UserService();
+        }
+        if (bookService == null) {
+            bookService = new BookService();
         }
     }
 
@@ -35,15 +39,21 @@ public class UserController   {
         userService.update(item);
     }
 
-    public void remove(Integer id) {
-        userService.remove(id);
+    public boolean remove(Integer id) {
+        return userService.remove(id);
     }
 
     public ArrayList<UserModel> serch(String word) {
-        return userService .search(word);
+        return userService.search(word);
     }
 
     public void removeBookFromUsersList(Integer bookId, Integer userId) {
-        userService.removeBookFromUsersList(bookId,userId);
+        userService.removeBookFromUsersList(bookId, userId);
+        bookService.returnedBook(bookId);
+    }
+
+    public void addBookIntoUsersList(String booksId, Integer userId) {
+        userService.addBookIntoUsersList(booksId, userId);
+        bookService.borrowBook(booksId);
     }
 }

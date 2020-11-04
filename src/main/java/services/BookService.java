@@ -5,9 +5,7 @@ import db.repository.BookRepository;
 import interface_pac.ServiceInterface;
 import models.BookModel;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 
 public class BookService implements ServiceInterface<BookModel> {
     private BookRepository bookSql = null;
@@ -17,14 +15,36 @@ public class BookService implements ServiceInterface<BookModel> {
         if (bookSql == null) {
             bookSql = new BookRepository();
         }
-        if (bookList==null){
-            bookList=getAll();
+        if (bookList == null) {
+            bookList = getAll();
         }
     }
 
     //getter
     public ArrayList<BookModel> getBookList() {
         return bookList;
+    }
+
+    public ArrayList<BookModel> recommendBooks(ArrayList<BookModel> alreadyHave) {
+
+        return null;
+    }
+
+    //return and borrow
+    public void returnedBook(Integer id) {
+        bookSql.updateBookCopy(id, bookSql.searchById(id).getCopy() + 1);
+    }
+
+    public void borrowBook(String booksId) {
+        for (String id:booksId.split(" ")){
+            bookSql.updateBookCopy(Integer.parseInt(id), bookSql.searchById(Integer.parseInt(id)).getCopy() - 1);
+        }
+
+    }
+
+    //
+    public void remove(Integer id) {
+        bookSql.remove(id);
     }
 
     //interface method
@@ -48,10 +68,6 @@ public class BookService implements ServiceInterface<BookModel> {
         bookSql.update(item);
     }
 
-    @Override
-    public void remove(Integer id) {
-        bookSql.remove(id);
-    }
 
     @Override
     public ArrayList<BookModel> search(String word) {

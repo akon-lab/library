@@ -48,9 +48,13 @@ public class UserService implements ServiceInterface<UserModel> {
         userSql.update(item);
     }
 
-    @Override
-    public void remove(Integer id) {
-        userSql.remove(id);
+    public boolean remove(Integer id) {
+        if (userSql.searchById(id).getStringlist().length() > 0) {
+            return false;
+        } else {
+            userSql.remove(id);
+            return true;
+        }
     }
 
     @Override
@@ -62,4 +66,10 @@ public class UserService implements ServiceInterface<UserModel> {
         userSql.updateStrList(userSql.searchById(userId).getStringlist().replace(bookId.toString(), ""), userId);
 
     }
+
+    public void addBookIntoUsersList(String booksId, Integer userId) {
+            userSql.updateStrList(userSql.searchById(userId).getStringlist() + " " + booksId, userId);
+
+    }
+
 }

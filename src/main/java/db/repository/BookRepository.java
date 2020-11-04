@@ -51,8 +51,8 @@ public class BookRepository extends ConnectDb implements SqlInterface<BookModel>
             while (resultSet.next()) {
                 list.add(new BookModel(
                         resultSet.getInt("id"),
-                        resultSet.getString("author"),
                         resultSet.getString("title"),
+                        resultSet.getString("author"),
                         resultSet.getInt("price")
                 ));
             }
@@ -96,7 +96,19 @@ public class BookRepository extends ConnectDb implements SqlInterface<BookModel>
             throwable.printStackTrace();
         }
     }
-
+    public void updateBookCopy(Integer id,Integer count) {
+        try {
+            String sql = "UPDATE books SET " +
+                    "price = ?," +
+                    "where id = ? limit 1";
+            PreparedStatement stmt = super.getConnection().prepareStatement(sql);
+            stmt.setInt(1, count);
+            stmt.setInt(2, id);
+            stmt.execute();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
     @Override
     public void remove(Integer id) {
         String sql = "delete from books where id = ?";
@@ -127,8 +139,8 @@ public class BookRepository extends ConnectDb implements SqlInterface<BookModel>
             while (resultSet.next()) {
                 list.add(new BookModel(
                         resultSet.getInt("id"),
-                        resultSet.getString("author"),
                         resultSet.getString("title"),
+                        resultSet.getString("author"),
                         resultSet.getInt("price")
                 ));
             }

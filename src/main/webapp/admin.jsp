@@ -1,8 +1,12 @@
-<%@include file="headers/admin.jsp"%>
+<%@include file="headers/admin.jsp" %>
 
 <div class="box mx-auto my-5">
 
-    <h3 class="text-center">Admin Page</h3>
+    <h3 class="text-center">
+        Admin Page
+        <!--logout button in 8 line-->
+        <span><a href=""><i class='fas fa-door-open'></i></a></span>
+    </h3>
     <div class="col d-flex mb-5">
 
         <a class="btn mx-auto" onclick="btn(readersList)">
@@ -86,9 +90,9 @@
 
                 <div class="user-box mx-auto d-flex justify-content-center">
                     <input placeholder="Readers" id="searchUser" type="text" name="reader" required="">
-                   <button onclick="searchUser()">
-                       <i class='fas fa-search'></i>
-                   </button>
+                    <button onclick="searchUser()">
+                        <i class='fas fa-search'></i>
+                    </button>
                 </div>
 
             </form>
@@ -139,9 +143,13 @@
                             </a>
                         </td>
                         <td><c:out value="${user.email}"/></td>
+
                         <td><c:out value="${user.bookList.size()}"/></td>
+
+
                         <td>
-                            <a href="${pageContext.request.contextPath}/user?action=remove&id=<c:out value="${user.id}"/>">
+                            <a onclick="removeUser(<c:out value="${user.bookList.size()}"/>,<c:out
+                                    value="${user.id}"/>)">
                                 <i class='far fa-trash-alt'></i>
                             </a>
                         </td>
@@ -170,4 +178,4 @@
 </div>
 
 
- <%@include file="/footers/form.jsp"%>
+<%@include file="/footers/form.jsp" %>
