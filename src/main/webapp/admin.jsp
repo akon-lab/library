@@ -4,7 +4,7 @@
     <h3 class="text-center">
         Admin Page
         <!--logout button in 8 line-->
-        <a href="${pageContext.request.contextPath}/admin.jsp">
+        <a href="${pageContext.request.contextPath}/log">
             <span><a href=""><i class='fas fa-door-open'></i></a></span>
         </a>
     </h3>

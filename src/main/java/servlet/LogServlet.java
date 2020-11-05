@@ -17,14 +17,12 @@ public class LogServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter p = resp.getWriter();
 
-        req.setAttribute("All", bookController.getAll());
-        req.setAttribute("users", userController.getAll());
-
         Cookie[] cookies = req.getCookies();
-        if(cookies != null){
-            for(Cookie cookie : cookies){
-                if(cookie.getName().equals("JSESSIONID")){
-                    p.println("JSESSIONID="+cookie.getValue());
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("JSESSIONID")) {
+                    p.println("JSESSIONID=" + cookie.getValue());
                 }
                 cookie.setMaxAge(0);
                 resp.addCookie(cookie);
@@ -32,8 +30,8 @@ public class LogServlet extends HttpServlet {
         }
         //invalidate the session if exists
         HttpSession session = req.getSession();
-        p.println("User="+session.getAttribute("user"));
-        if (session != null){
+        p.println("User=" + session.getAttribute("user"));
+        if (session != null) {
             session.setMaxInactiveInterval(-1);
         }
         req.getRequestDispatcher("/log.jsp").forward(req, resp);
@@ -55,6 +53,9 @@ public class LogServlet extends HttpServlet {
                 userName.setMaxAge(2 * 60 * 60);
                 resp.addCookie(userName);
 
+                req.setAttribute("All", bookController.getAll());
+                req.setAttribute("users", userController.getAll());
+
                 req.getRequestDispatcher("/admin.jsp").forward(req, resp);
             } else {
                 PrintWriter p = resp.getWriter();
@@ -62,11 +63,12 @@ public class LogServlet extends HttpServlet {
 
                 req.getRequestDispatcher("/log.jsp").forward(req, resp);
             }
-            } else {
-                PrintWriter p = resp.getWriter();
-                p.println("user name or password is wrong.");
+        } else {
+            PrintWriter p = resp.getWriter();
+            p.println("user name or password is wrong.");
 
-                req.getRequestDispatcher("/log.jsp").forward(req, resp);
-            }
+            req.getRequestDispatcher("/log.jsp").forward(req, resp);
+        }
+
     }
 }
