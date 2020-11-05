@@ -6,6 +6,8 @@ import services.BookService;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class BookController  {
@@ -44,7 +46,9 @@ public class BookController  {
         return bookService.search(word);
     }
 
-    public ArrayList<BookModel>  sortByCopy(ArrayList<BookModel> books){
-        return bookService.sortByCopy(books);
+    public Set<BookModel>  sortByCopy(ArrayList<BookModel> books){
+        bookService.sortByCopy(books);
+        Set<BookModel> booksSet = new HashSet<>(books);
+        return booksSet;
     }
 }

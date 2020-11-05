@@ -27,7 +27,7 @@
 
                 <div class="user-box mx-auto d-flex justify-content-center">
                     <input placeholder="Books" type="text" name="book" required="">
-                    <a href="">
+                    <a onclick="searchUser()">
                         <i class='fas fa-search'></i>
                     </a>
                 </div>
@@ -91,9 +91,9 @@
 
                 <div class="user-box mx-auto d-flex justify-content-center">
                     <input placeholder="Readers" id="searchUser" type="text" name="reader" required="">
-                    <button onclick="searchUser()">
+                    <a onclick="searchUser()">
                         <i class='fas fa-search'></i>
-                    </button>
+                    </a>
                 </div>
 
             </form>

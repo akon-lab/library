@@ -82,6 +82,12 @@ public class BookServlet extends HttpServlet {
 
                     request.getRequestDispatcher("/userBookList.jsp").forward(request, response);
                     break;
+                }case "sort": {
+                    //Integer id = Integer.parseInt(request.getParameter("id"));
+                    request.setAttribute("all", bookController.sortByCopy(bookController.getAll()));
+
+                    request.getRequestDispatcher("/userBookList.jsp").forward(request, response);
+                    break;
                 }
             }
         }

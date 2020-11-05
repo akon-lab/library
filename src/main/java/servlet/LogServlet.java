@@ -53,7 +53,7 @@ public class LogServlet extends HttpServlet {
                 userName.setMaxAge(2 * 60 * 60);
                 resp.addCookie(userName);
 
-                req.setAttribute("All", bookController.getAll());
+                req.setAttribute("all", bookController.getAll());
                 req.setAttribute("users", userController.getAll());
 
                 req.getRequestDispatcher("/admin.jsp").forward(req, resp);
