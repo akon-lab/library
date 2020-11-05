@@ -1,11 +1,12 @@
 <%@include file="headers/admin.jsp" %>
 
 <div class="box mx-auto my-5">
-
     <h3 class="text-center">
         Admin Page
         <!--logout button in 8 line-->
-        <span><a href=""><i class='fas fa-door-open'></i></a></span>
+        <a href="${pageContext.request.contextPath}/admin.jsp">
+            <span><a href=""><i class='fas fa-door-open'></i></a></span>
+        </a>
     </h3>
     <div class="col d-flex mb-5">
 

@@ -37,6 +37,16 @@
         <servlet-name>user</servlet-name>
         <url-pattern>/user</url-pattern>
     </servlet-mapping>
+    <!--Beru Pechen'ku-->
+    <servlet-mapping>
+        <servlet-name>GetServlet</servlet-name>
+        <url-pattern>/GetServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetServlet</servlet-name>
+        <servlet-class>servlet.GetServlet</servlet-class>
+    </servlet>
 
     <!--db-->
     <resource-ref>
