@@ -85,7 +85,7 @@ public class BookRepository extends ConnectDb implements SqlInterface<BookModel>
                     "title = ?," +
                     "price = ?," +
                     "author = ? " +
-                    "where id = ?";
+                    "where id = ? limit 1";
             PreparedStatement stmt = super.getConnection().prepareStatement(sql);
             stmt.setString(1, book.getTitle());
             stmt.setInt(2, book.getCopy());
@@ -96,6 +96,7 @@ public class BookRepository extends ConnectDb implements SqlInterface<BookModel>
             throwable.printStackTrace();
         }
     }
+
     public void updateBookCopy(Integer id,Integer count) {
         try {
             String sql = "UPDATE books SET " +

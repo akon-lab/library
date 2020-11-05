@@ -20,25 +20,6 @@ public class LogServlet extends HttpServlet {
         req.setAttribute("users", userController.getAll());
 
         getServletContext().getRequestDispatcher("/admin.jsp").forward(req, resp);
-/*
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
 
-
-        UserModel user = userController.getUserByEmail(email.trim());
-        if (user != null) {
-
-            if (user.getPassword().equals(password)) {
-                req.setAttribute("all", bookController.getAll());
-                req.setAttribute("users", userController.getAll());
-
-                getServletContext().getRequestDispatcher("/admin.jsp").forward(req, resp);
-            } else {
-                getServletContext().getRequestDispatcher("/log.jsp").forward(req, resp);
-            }
-        } else {
-
-        }
-        getServletContext().getRequestDispatcher("/log.jsp").forward(req, resp);*/
     }
 }

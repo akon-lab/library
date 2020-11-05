@@ -9,21 +9,13 @@ import java.util.*;
 
 public class BookService implements ServiceInterface<BookModel> {
     private BookRepository bookSql = null;
-    private ArrayList<BookModel> bookList = null;
 
     public BookService() {
         if (bookSql == null) {
             bookSql = new BookRepository();
         }
-        if (bookList == null) {
-            bookList = getAll();
-        }
     }
 
-    //getter
-    public ArrayList<BookModel> getBookList() {
-        return bookList;
-    }
 
     public ArrayList<BookModel> recommendBooks(ArrayList<BookModel> alreadyHave) {
 
@@ -42,7 +34,7 @@ public class BookService implements ServiceInterface<BookModel> {
 
     }
 
-    //
+    @Override
     public void remove(Integer id) {
         bookSql.remove(id);
     }

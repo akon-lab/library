@@ -26,7 +26,7 @@ public class UserModel {
         this.password = password;
         this.email = email;
         this.stringlist = list;
-        bookList = setBookList(list);
+        this.bookList = setBookList(list);
     }
 
     //for save data to db

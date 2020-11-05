@@ -49,32 +49,40 @@ public class BookServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action != null) {
-            if (action.equals("update")) {
-                Integer id = Integer.parseInt(request.getParameter("id"));
-                request.setAttribute("book", bookController.getItemById(id));
-                request.getRequestDispatcher("/updateForm/updateBook.jsp").forward(request, response);
+            switch (action) {
+                case "update": {
+                    Integer id = Integer.parseInt(request.getParameter("id"));
+                    request.setAttribute("book", bookController.getItemById(id));
+                    request.getRequestDispatcher("/updateForm/updateBook.jsp").forward(request, response);
 
-            } else if (action.equals("add")) {
-                request.getRequestDispatcher("/addForm/addBook.jsp").forward(request, response);
+                    break;
+                }
+                case "add":
+                    request.getRequestDispatcher("/addForm/addBook.jsp").forward(request, response);
 
-            } else if (action.equals("remove")) {
-                Integer id = Integer.parseInt(request.getParameter("id"));
-                bookController.remove(id);
+                    break;
+                case "remove": {
+                    Integer id = Integer.parseInt(request.getParameter("id"));
+                    bookController.remove(id);
 
-            } else if (action.equals("search")) {
-                String book = request.getParameter("reader");
-                ArrayList<BookModel> books = bookController.serch(book);
+                    break;
+                }
+                case "search":
+                    String book = request.getParameter("reader");
+                    ArrayList<BookModel> books = bookController.serch(book);
 
-                response.setContentType("text/html;charset=UTF-8");
-                String json = new Gson().toJson(books);
+                    response.setContentType("text/html;charset=UTF-8");
+                    String json = new Gson().toJson(books);
 
-                response.getWriter().write(json);
-                return;
-            }else if (action.equals("listBook")){
-                Integer id = Integer.parseInt(request.getParameter("id"));
-                request.setAttribute("all", bookController.getAll());
+                    response.getWriter().write(json);
+                    return;
+                case "listBook": {
+                    //Integer id = Integer.parseInt(request.getParameter("id"));
+                    request.setAttribute("all", bookController.getAll());
 
-                request.getRequestDispatcher("/userBookList.jsp").forward(request, response);
+                    request.getRequestDispatcher("/userBookList.jsp").forward(request, response);
+                    break;
+                }
             }
         }
 

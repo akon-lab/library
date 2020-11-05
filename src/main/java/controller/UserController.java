@@ -20,7 +20,7 @@ public class UserController {
     }
 
     public ArrayList<UserModel> getAll() {
-        return userService.getUserList();
+        return userService.getAll();
     }
 
     public UserModel getItemById(Integer id) {
@@ -39,8 +39,8 @@ public class UserController {
         userService.update(item);
     }
 
-    public boolean remove(Integer id) {
-        return userService.remove(id);
+    public void remove(Integer id) {
+          userService.remove(id);
     }
 
     public ArrayList<UserModel> serch(String word) {

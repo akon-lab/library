@@ -3,7 +3,10 @@ package controller;
 import models.BookModel;
 import services.BookService;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 import java.util.ArrayList;
+
 
 public class BookController  {
     private BookService bookService = null;
@@ -16,7 +19,7 @@ public class BookController  {
     }
 
     public ArrayList<BookModel> getAll() {
-        return bookService.getBookList();
+        return bookService.getAll();
     }
 
     public BookModel getItemById(Integer id) {
@@ -31,6 +34,8 @@ public class BookController  {
         bookService.update(item);
     }
 
+    @GET
+    @Path("/removeUser")
     public void remove(Integer id) {
         bookService.remove(id);
     }

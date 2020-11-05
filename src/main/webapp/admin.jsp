@@ -110,7 +110,6 @@
                 <th></th>
             </tr>
             </thead>
-            <tbody>
             <c:if test="${userList!=null}">
                 <c:forEach items="${userList}" var="reader">
                     <tr>

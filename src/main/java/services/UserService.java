@@ -8,21 +8,13 @@ import java.util.ArrayList;
 
 public class UserService implements ServiceInterface<UserModel> {
     private UserRepository userSql = null;
-    private ArrayList<UserModel> userList = null;
 
     public UserService() {
         if (userSql == null) {
             userSql = new UserRepository();
         }
-        if (userList == null) {
-            userList = getAll();
-        }
     }
 
-    //getter
-    public ArrayList<UserModel> getUserList() {
-        return userList;
-    }
 
     @Override
     public ArrayList<UserModel> getAll() {
@@ -48,13 +40,9 @@ public class UserService implements ServiceInterface<UserModel> {
         userSql.update(item);
     }
 
-    public boolean remove(Integer id) {
-        if (userSql.searchById(id).getStringlist().length() > 0) {
-            return false;
-        } else {
-            userSql.remove(id);
-            return true;
-        }
+    @Override
+    public void remove(Integer id) {
+        userSql.remove(id);
     }
 
     @Override
@@ -68,7 +56,7 @@ public class UserService implements ServiceInterface<UserModel> {
     }
 
     public void addBookIntoUsersList(String booksId, Integer userId) {
-            userSql.updateStrList(userSql.searchById(userId).getStringlist() + " " + booksId, userId);
+        userSql.updateStrList(userSql.searchById(userId).getStringlist() + " " + booksId, userId);
 
     }
 

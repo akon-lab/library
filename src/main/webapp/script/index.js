@@ -22,30 +22,39 @@ function searchUser() {
             if (this.readyState === 4 && this.status === 200) {
                 var userList = JSON.parse(this.responseText);
                 if (userList.length > 0) {
-                    var result = xhttp.responseText;
+                    var readerSearchResult = xhttp.responseText;
+
                 }
             }
         }
     }
-    xhttp.open("GET", "", true);
+    xhttp.open(" GET", "/user", true);
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhttp.send("action=search&reader=" + word);
+    xhttp.send(" action=search&reader=" + word);
 }
 
 function removeUser(count, userId) {
 
-    if (count <= 0 || count === null||count === "") {
-        ///user?action=remove&id=
-        let endpoint = "http://localhost:8080/secret_library_war/user?action=remove&id=";
-        $.ajax({
-            url: endpoint + userId,
-            contentType: "application/json",
-            dataType: 'json',
-            success: function (result) {
-            }
-        })
+    if (count > 0) {
+        alert(" That user didn't return all book");
+
     } else {
-        alert("That user didn't return all book");
+        xhttp.open("GET", "/removeUser", true);
+        xhttp.setRequestHeader(' Content-type', ' application/x-www-form-urlencoded');
+        xhttp.send("id=" + userId);
+
+        ///user?action=remove&id=
+        /*     let endpoint = "http://localhost:8080/secret_library_war/user";
+             $.ajax({
+                 url: endpoint,
+                 method:"get",
+                 data: {
+                     "action": "remove",
+                     "id": userId
+                 },
+                 dataType: ' text',
+
+             })*/
     }
 }
 
@@ -59,8 +68,8 @@ function checkbox() {
             str += checkbox[i].value + " ";
         }
     }
-    xhttp.open("GET", "", true);
-    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.open("GET", "/user", true);
+    xhttp.setRequestHeader(' Content-type', ' application/x-www-form-urlencoded');
     xhttp.send("action=addToList&books=" + str);
 
 }
