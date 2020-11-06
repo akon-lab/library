@@ -3,6 +3,7 @@ package servlet;
 import com.google.gson.Gson;
 import controller.BookController;
 import controller.UserController;
+import models.BookModel;
 import models.UserModel;
 
 import javax.servlet.ServletException;
@@ -28,11 +29,17 @@ public class UserServlet extends HttpServlet {
         if (action != null) {
             if (action.equals("update")) {
                 Integer id = Integer.parseInt(req.getParameter("id"));
-                userController.update(new UserModel(id, name, email, password, null));
+                UserModel userModel = userController.getItemById(id);
+                userModel.setName(name);
+                userModel.setEmail(email);
+                userModel.setPassword(password);
+                userController.update(userModel);
 
             } else if (action.equals("add")) {
-                userController.add(new UserModel(name, email, password, null));
-
+                userController.add(new UserModel.UserBuilder(name)
+                .withEmail(email)
+                .withPassword(password)
+                .build());
             }
         }
         req.setAttribute("all", bookController.getAll());

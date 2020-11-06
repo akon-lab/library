@@ -9,16 +9,22 @@ public class UserModel {
     private String name;
     private String email;
     private String password;
-
     private ArrayList<BookModel> bookList = null;
     private String stringlist = null;
 
-    private final UserBuilder userBuilder = new UserBuilder();
 
-    public UserModel() {
 
+    public UserModel(UserBuilder userBuilder) {
+        this.id = userBuilder.id;
+        this.name = userBuilder.name;
+        this.email = userBuilder.email;
+        this.password = userBuilder.password;
+        this.bookList = userBuilder.bookList;
+        this.stringlist = userBuilder.stringlist;
     }
+        public UserModel(){
 
+        }
     // for get data from db
     public UserModel(Integer id, String name, String email, String password, String list) {
         this.id = id;
@@ -26,7 +32,7 @@ public class UserModel {
         this.password = password;
         this.email = email;
         this.stringlist = list;
-        this.bookList = setBookList(list);
+        //this.bookList = setBookList(list);
     }
 
     //for save data to db
@@ -39,7 +45,7 @@ public class UserModel {
 
     //setter
     //из стринга в лист
-    private ArrayList<BookModel> setBookList(String listOfNum) {
+   /* private ArrayList<BookModel> setBookList(String listOfNum) {
         return userBuilder.setBookList(listOfNum);
 
     }
@@ -48,7 +54,7 @@ public class UserModel {
     public String setStringList(ArrayList<Integer> booksList) {
          return userBuilder.setStringList(booksList);
 
-    }
+    }*/
 
     //getter
     public Integer getId() {
@@ -67,11 +73,76 @@ public class UserModel {
         return password;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setBookList(ArrayList<BookModel> bookList) {
+        this.bookList = bookList;
+    }
+
+    public void setStringlist(String stringlist) {
+        this.stringlist = stringlist;
+    }
+
     public ArrayList<BookModel> getBookList() {
         return bookList;
     }
 
     public String getStringlist() {
         return stringlist;
+    }
+
+    public static class UserBuilder{
+        private Integer id;
+        private String name;
+        private String email;
+        private String password;
+        private ArrayList<BookModel> bookList = null;
+        private String stringlist = null;
+        public UserBuilder(String name){
+            this.name = name;
+        }
+        public UserBuilder withId(Integer id){
+            this.id = id;
+            return this;
+        }
+
+        public UserBuilder withEmail(String email){
+            this.email = email;
+            return this;
+        }
+
+        public UserBuilder withPassword(String password){
+            this.password = password;
+            return this;
+        }
+
+        public UserBuilder withBookList(ArrayList<BookModel> bookList){
+            this.bookList = bookList;
+            return this;
+        }
+
+        public UserBuilder withStringList(String stringlist){
+            this.stringlist = stringlist;
+            return this;
+        }
+
+        public UserModel build(){
+            return new UserModel(this);
+        }
+
     }
 }

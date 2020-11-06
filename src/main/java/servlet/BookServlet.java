@@ -32,8 +32,11 @@ public class BookServlet extends HttpServlet {
                 bookController.update(new BookModel(id, name, author, Integer.parseInt(copy)));
 
             } else if (action.equals("add")) {
-                bookController.add(new BookModel(name, author, Integer.parseInt(copy)));
-
+                //bookController.add(new BookModel(name, author, Integer.parseInt(copy)));
+                bookController.add(new BookModel.BookBuilder(name)
+                .withAuthor(author)
+                .withCopy(Integer.parseInt(copy))
+                .build());
             }
         }
 

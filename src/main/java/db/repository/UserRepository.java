@@ -17,18 +17,24 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
 
         try {
             String sql = "select * from users " +
-                    "where email = " + email + ";";
+                    "where email = '" + email + "';";
             Statement statement = super.getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
 
             if (resultSet.next()) {
-                userItem = new UserModel(
+                /*userItem = new UserModel(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("email"),
                         resultSet.getString("password"),
                         resultSet.getString("list")
-                );
+                );*/
+                userItem = new UserModel.UserBuilder(resultSet.getString("name"))
+                        .withId(resultSet.getInt("id"))
+                        .withEmail(resultSet.getString("email"))
+                        .withPassword(resultSet.getString("password"))
+                        .withStringList(resultSet.getString("list"))
+                        .build();
             }
         } catch (SQLException throwable) {
             throwable.printStackTrace();
@@ -49,13 +55,19 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
             ResultSet resultSet = statement.executeQuery(sql);
 
             if (resultSet.next()) {
-                userItem = new UserModel(
+                /*userItem = new UserModel(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("email"),
                         resultSet.getString("password"),
                         resultSet.getString("list")
-                );
+                );*/
+                userItem = new UserModel.UserBuilder(resultSet.getString("name"))
+                        .withId(resultSet.getInt("id"))
+                        .withEmail(resultSet.getString("email"))
+                        .withPassword(resultSet.getString("password"))
+                        .withStringList(resultSet.getString("list"))
+                        .build();
             }
             return userItem;
         } catch (SQLException throwable) {
@@ -75,13 +87,13 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
             Statement statement = super.getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                list.add(new UserModel(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getString("email"),
-                        resultSet.getString("password"),
-                        resultSet.getString("list")
-                ));
+                list.add(new UserModel.UserBuilder(resultSet.getString("name"))
+                        .withId(resultSet.getInt("id"))
+                        .withEmail(resultSet.getString("email"))
+                        .withPassword(resultSet.getString("password"))
+                        .withStringList(resultSet.getString("list"))
+                        .build()
+                );
             }
 
         } catch (SQLException throwable) {
@@ -167,13 +179,13 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
             Statement statement = super.getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                list.add(new UserModel(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getString("email"),
-                        resultSet.getString("password"),
-                        resultSet.getString("list")
-                ));
+                list.add(new UserModel.UserBuilder(resultSet.getString("name"))
+                        .withId(resultSet.getInt("id"))
+                        .withEmail(resultSet.getString("email"))
+                        .withPassword(resultSet.getString("password"))
+                        .withStringList(resultSet.getString("list"))
+                        .build()
+                );
             }
 
         } catch (SQLException throwable) {
