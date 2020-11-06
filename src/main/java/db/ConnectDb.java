@@ -17,7 +17,7 @@ public class ConnectDb {
             try {
                 Context initialContext = new InitialContext();
                 Context envCtx = (Context) initialContext.lookup("java:comp/env");
-                DataSource ds = (DataSource) envCtx.lookup("jdbc/week");
+                DataSource ds = (DataSource) envCtx.lookup("jdbc/library");
                 connection = ds.getConnection();
             } catch (SQLException | NamingException e) {
                 e.printStackTrace();

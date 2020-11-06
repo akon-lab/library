@@ -68,7 +68,7 @@ function checkbox() {
             str += checkbox[i].value + " ";
         }
     }
-    xhttp.open("GET", "/user", true);
+    xhttp.open("GET", "http://localhost:8080/secret_library_war/user", true);
     xhttp.setRequestHeader(' Content-type', ' application/x-www-form-urlencoded');
     xhttp.send("action=addToList&books=" + str);
 
