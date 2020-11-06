@@ -49,7 +49,6 @@ public class UserController {
 
     public void removeBookFromUsersList(Integer bookId, Integer userId) {
         userService.removeBookFromUsersList(bookId, userId);
-        bookService.returnedBook(bookId);
     }
 
     public void addBookIntoUsersList(String booksId, Integer userId) {

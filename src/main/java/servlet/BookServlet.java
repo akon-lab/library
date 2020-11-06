@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import controller.BookController;
 import controller.UserController;
 import models.BookModel;
+import models.UserModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -80,9 +81,9 @@ public class BookServlet extends HttpServlet {
                     response.getWriter().write(json);
                     return;
                 case "listBook": {
-                    //Integer id = Integer.parseInt(request.getParameter("id"));
                     request.setAttribute("all", bookController.getAll());
-
+                    UserModel userModel = userController.getItemById(Integer.parseInt(request.getParameter("id")));
+                    request.setAttribute("User",userModel);
                     request.getRequestDispatcher("/userBookList.jsp").forward(request, response);
                     break;
                 }case "sort": {
@@ -95,8 +96,5 @@ public class BookServlet extends HttpServlet {
             }
         }
 
-        request.setAttribute("all", bookController.getAll());
-
-        request.getRequestDispatcher("/admin.jsp").forward(request, response);
     }
 }

@@ -166,6 +166,19 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
 
     }
 
+    public void removeUserBook(Integer book_id,Integer user_id)   {
+        String sql = "delete from borrowedbooks where book_id = ? and user_id = ?";
+        try {
+            PreparedStatement stmt = super.getConnection().prepareStatement(sql);
+            stmt.setInt(1, book_id);
+            stmt.setInt(2, user_id);
+            stmt.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
     //problem
     @Override
     public ArrayList<UserModel> search(String word) {

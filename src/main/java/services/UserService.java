@@ -51,8 +51,7 @@ public class UserService implements ServiceInterface<UserModel> {
     }
 
     public void removeBookFromUsersList(Integer bookId, Integer userId) {
-        userSql.updateStrList(userSql.searchById(userId).getStringlist().replace(bookId.toString(), ""), userId);
-
+        userSql.removeUserBook(bookId,userId);
     }
 
     public void addBookIntoUsersList(String booksId, Integer userId) {

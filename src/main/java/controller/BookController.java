@@ -19,7 +19,9 @@ public class BookController  {
             bookService = new BookService();
         }
     }
-
+    public ArrayList<BookModel> getAllUserBook(int id){
+        return bookService.getAllUserBooks(id);
+    }
     public ArrayList<BookModel> getAll() {
         return bookService.getAll();
     }
@@ -36,6 +38,7 @@ public class BookController  {
         bookService.update(item);
     }
 
+    public void addUserBook(int user_id,int book_id){bookService.addUserBook(user_id,book_id);}
     @GET
     @Path("/removeUser")
     public void remove(Integer id) {
