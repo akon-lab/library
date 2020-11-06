@@ -10,6 +10,11 @@ import java.util.*;
 public class BookService implements ServiceInterface<BookModel> {
     private BookRepository bookSql = null;
 
+    /*public BookService() {
+        if (bookSql == null) {
+            bookSql = new BookRepository();
+        }
+    }*/
 
 
     public ArrayList<BookModel> recommendBooks(ArrayList<BookModel> alreadyHave) {
@@ -22,19 +27,6 @@ public class BookService implements ServiceInterface<BookModel> {
             bookSql = new BookRepository();
         }
         bookSql.updateBookCopy(id, bookSql.searchById(id).getCopy() + 1);
-    }
-    public ArrayList<BookModel> getAllUserBooks(int id){
-        if(bookSql == null){
-            bookSql = new BookRepository();
-        }
-        return bookSql.getAllUserBooks(id);
-    }
-
-    public void addUserBook(int user_id,int book_id){
-        if(bookSql == null){
-            bookSql = new BookRepository();
-        }
-        bookSql.addUserBook(user_id,book_id);
     }
 
     public void borrowBook(String booksId) {

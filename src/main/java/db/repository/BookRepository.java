@@ -63,27 +63,6 @@ public class BookRepository extends ConnectDb implements SqlInterface<BookModel>
         return list;
     }
 
-    public ArrayList<BookModel> getAllUserBooks(int id) {
-        ArrayList<BookModel> userList = new ArrayList<>();
-        try {
-            String sql = "SELECT books.id,books.title,books.description,books.author  FROM borrowedbooks INNER JOIN books ON borrowedbooks.book_id = books.id  WHERE borrowedbooks.user_id ="+id;
-            Statement statement = super.getConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                userList.add(new BookModel.BookBuilder(resultSet.getString("title"))
-                .withAuthor(resultSet.getString("author"))
-                .withId(resultSet.getInt("id"))
-                .build());
-            }
-
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-        }
-        return userList;
-    }
-
-
-
     @Override
     public void add(BookModel book) {
         try {
@@ -93,19 +72,6 @@ public class BookRepository extends ConnectDb implements SqlInterface<BookModel>
             stmt.setString(1, book.getTitle());
             stmt.setInt(2, book.getCopy());
             stmt.setString(3, book.getAuthor());
-            stmt.execute();
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-        }
-    }
-
-    public void addUserBook(int user_id,int book_id) {
-        try {
-            String sql = "INSERT INTO borrowedbooks(user_id,book_id) " +
-                    "VALUE(?, ?)";
-            PreparedStatement stmt = super.getConnection().prepareStatement(sql);
-            stmt.setInt(1, user_id);
-            stmt.setInt(2, book_id);
             stmt.execute();
         } catch (SQLException throwable) {
             throwable.printStackTrace();

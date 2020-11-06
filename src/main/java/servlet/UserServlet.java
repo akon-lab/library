@@ -54,58 +54,61 @@ public class UserServlet extends HttpServlet {
         resp.setContentType("text/html");
 
         String action = req.getParameter("action");
+
         if (action != null) {
             switch (action) {
                 case "update": {
                     Integer id = Integer.parseInt(req.getParameter("id"));
                     req.setAttribute("user", userController.getItemById(id));
                     req.getRequestDispatcher("/updateForm/updateReaders.jsp").forward(req, resp);
+
                     break;
                 }
-                case "add": {
-                    int id = Integer.parseInt(req.getParameter("id"));
+                case "add":
                     req.getRequestDispatcher("/addForm/addReaders.jsp").forward(req, resp);
+
                     break;
-                }
                 case "remove": {
                     Integer id = Integer.parseInt(req.getParameter("id"));
                     userController.remove(id);
+
                     break;
                 }
-                case "search": {
+                case "search":
                     String reader = req.getParameter("reader");
                     ArrayList<UserModel> users = userController.serch(reader);
+
                     resp.setContentType("text/html;charset=UTF-8");
                     String json = new Gson().toJson(users);
+
                     resp.getWriter().write(json);
                     return;
-                }
+
                 case "prof": {
-                    int id = Integer.parseInt(req.getParameter("id"));
-                    ArrayList<BookModel> userBooks = bookController.getAllUserBook(id);
+                    Integer id = Integer.parseInt(req.getParameter("id"));
                     req.setAttribute("user", userController.getItemById(id));
-                    req.setAttribute("userBooks",userBooks);
                     req.getRequestDispatcher("/profile.jsp").forward(req, resp);
+
                     break;
                 }
                 case "removeFromList": {
                     Integer book_id = Integer.parseInt(req.getParameter("book"));
                     Integer user_id = Integer.parseInt(req.getParameter("user"));
                     userController.removeBookFromUsersList(book_id, user_id);
-                    resp.sendRedirect("user?action=prof&id="+user_id);
+
                     break;
                 }
                 case "addToList": {
-                    Integer id = Integer.parseInt(req.getParameter("id"));
-                    Integer book_id  = Integer.parseInt(req.getParameter("book_id"));
-                    bookController.addUserBook(id,book_id);
-                    req.setAttribute("user", userController.getItemById(id));
-                    resp.sendRedirect("user?action=prof&id="+id);
+                    String listOfBook = req.getParameter("books");
+                    Integer user_id = Integer.parseInt(req.getParameter("user"));
+                    userController.addBookIntoUsersList(listOfBook, user_id);
+
+                    resp.sendRedirect(req.getHeader("referer"));
                     break;
                 }
             }
         }
-        //req.getRequestDispatcher("/admin.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin.jsp").forward(req, resp);
 
     }
 }

@@ -1,5 +1,6 @@
 package models;
 
+import models.builders.UserBuilder;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,16 @@ public class UserModel {
 
     //setter
     //из стринга в лист
+   /* private ArrayList<BookModel> setBookList(String listOfNum) {
+        return userBuilder.setBookList(listOfNum);
 
+    }
+
+    //перезаписать лист инт книгок на стринг
+    public String setStringList(ArrayList<Integer> booksList) {
+         return userBuilder.setStringList(booksList);
+
+    }*/
 
     //getter
     public Integer getId() {
