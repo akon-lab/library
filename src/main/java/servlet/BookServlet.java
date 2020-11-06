@@ -60,10 +60,10 @@ public class BookServlet extends HttpServlet {
 
                     break;
                 }
-                case "add":
+                case "add":{
                     request.getRequestDispatcher("/addForm/addBook.jsp").forward(request, response);
 
-                    break;
+                    break;}
                 case "remove": {
                     Integer id = Integer.parseInt(request.getParameter("id"));
                     bookController.remove(id);
@@ -80,7 +80,9 @@ public class BookServlet extends HttpServlet {
                     response.getWriter().write(json);
                     return;
                 case "listBook": {
-                    //Integer id = Integer.parseInt(request.getParameter("id"));
+                    Integer id = Integer.parseInt(request.getParameter("id"));
+
+                    request.setAttribute("user",userController.getItemById(id).getId());
                     request.setAttribute("all", bookController.getAll());
 
                     request.getRequestDispatcher("/userBookList.jsp").forward(request, response);

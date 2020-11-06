@@ -37,7 +37,9 @@
                         <td><c:out value="${book.title}"/></td>
                         <td><c:out value="${book.author}"/></td>
                         <td>
-                            <input type="checkbox" value="<c:out value="${book.id}"/>" name="co" id="">
+                            <a href="${pageContext.request.contextPath}/user?action=addToList&id=<c:out value="${book.id}"/>&user_id=<c:out value="${user}"/>">
+                                add
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -49,9 +51,7 @@
 
 
     </div>
-    <a style="width: 40%;" onclick="checkbox()" class="btn mx-auto d-flex justify-content-center">
-        Add books
-    </a>
+
 
 </div>
 

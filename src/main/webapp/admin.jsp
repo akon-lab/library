@@ -148,8 +148,7 @@
 
 
                         <td>
-                            <a onclick="removeUser(<c:out value="${user.bookList.size()}"/>,<c:out
-                                    value="${user.id}"/>)">
+                            <a href="${pageContext.request.contextPath}/user?action=remove&id=<c:out value="${user.id}"/>">
                                 <i class='far fa-trash-alt'></i>
                             </a>
                         </td>

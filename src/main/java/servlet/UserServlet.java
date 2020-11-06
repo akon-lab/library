@@ -64,17 +64,18 @@ public class UserServlet extends HttpServlet {
 
                     break;
                 }
-                case "add":
+                case "add":{
                     req.getRequestDispatcher("/addForm/addReaders.jsp").forward(req, resp);
 
                     break;
+                }
                 case "remove": {
                     Integer id = Integer.parseInt(req.getParameter("id"));
                     userController.remove(id);
 
                     break;
                 }
-                case "search":
+                case "search": {
                     String reader = req.getParameter("reader");
                     ArrayList<UserModel> users = userController.serch(reader);
 
@@ -83,7 +84,7 @@ public class UserServlet extends HttpServlet {
 
                     resp.getWriter().write(json);
                     return;
-
+                }
                 case "prof": {
                     Integer id = Integer.parseInt(req.getParameter("id"));
                     req.setAttribute("user", userController.getItemById(id));
@@ -96,19 +97,21 @@ public class UserServlet extends HttpServlet {
                     Integer user_id = Integer.parseInt(req.getParameter("user"));
                     userController.removeBookFromUsersList(book_id, user_id);
 
+                    req.setAttribute("user", userController.getItemById(user_id));
+                    req.getRequestDispatcher("/profile.jsp").forward(req, resp);
                     break;
                 }
                 case "addToList": {
-                    String listOfBook = req.getParameter("books");
-                    Integer user_id = Integer.parseInt(req.getParameter("user"));
+                    String listOfBook = req.getParameter("id");
+                    Integer user_id = Integer.parseInt(req.getParameter("user_id"));
                     userController.addBookIntoUsersList(listOfBook, user_id);
 
-                    resp.sendRedirect(req.getHeader("referer"));
+                    req.setAttribute("user", userController.getItemById(user_id));
+                    req.getRequestDispatcher("/profile.jsp").forward(req, resp);
                     break;
                 }
             }
         }
-        req.getRequestDispatcher("/admin.jsp").forward(req, resp);
 
     }
 }
