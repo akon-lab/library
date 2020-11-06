@@ -42,33 +42,25 @@ public class LogServlet extends HttpServlet {
         String email = req.getParameter("email");
         String pwd = req.getParameter("password");
 
-        UserModel user = userController.getUserByEmail(email);
-        if (user != null) {
-            if (email.equals("admin@mail.ru") && pwd.equals("12345")) {
-                HttpSession session = req.getSession();
-                session.setAttribute("user", "admin");
-                session.setMaxInactiveInterval(2 * 60 * 60);
+        if (email.equals("admin@mail.ru") && pwd.equals("12345")) {
+            HttpSession session = req.getSession();
+            session.setAttribute("user", "admin");
+            session.setMaxInactiveInterval(2 * 60 * 60);
 
-                Cookie userName = new Cookie("user", email);
-                userName.setMaxAge(2 * 60 * 60);
-                resp.addCookie(userName);
+            Cookie userName = new Cookie("user", email);
+            userName.setMaxAge(2 * 60 * 60);
+            resp.addCookie(userName);
 
-                req.setAttribute("all", bookController.getAll());
-                req.setAttribute("users", userController.getAll());
+            req.setAttribute("all", bookController.getAll());
+            req.setAttribute("users", userController.getAll());
 
-                req.getRequestDispatcher("/admin.jsp").forward(req, resp);
-            } else {
-                PrintWriter p = resp.getWriter();
-                p.println("user name or password is wrong.");
-
-                req.getRequestDispatcher("/log.jsp").forward(req, resp);
-            }
+            req.getRequestDispatcher("/admin.jsp").forward(req, resp);
         } else {
             PrintWriter p = resp.getWriter();
             p.println("user name or password is wrong.");
 
             req.getRequestDispatcher("/log.jsp").forward(req, resp);
         }
-
     }
+
 }
