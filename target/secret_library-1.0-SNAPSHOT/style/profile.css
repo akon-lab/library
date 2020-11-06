@@ -1,0 +1,94 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(#141e30, #243b55);
+}
+
+.box {
+    position: absolute;
+    width: 70%;
+    top: 300px;
+    left: 50%;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, .5);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+    border-radius: 10px;
+    color: white;
+}
+
+ul {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+li {
+    padding: 3%;
+    list-style: none;
+    background: linear-gradient(to left, #30cfd0 0%, #330867 100%);
+}
+
+li a {
+    color: white;
+    transition: ease-in-out .5s;
+}
+
+li a:hover {
+    color: #330867;
+    text-shadow: 0 0 5px white, 0 0 5px white, 0 0 30px white, 0 0 70px white;
+}
+
+li:first-child {
+    border-radius: 10px 10px 0 0;
+}
+
+li:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
+li:nth-child(even) {
+    background: whitesmoke;
+    color: black;
+}
+
+li:nth-child(even) a {
+    color: black;
+}
+
+li:nth-child(even) a:hover {
+    color: white;
+    text-shadow: 0 0 5px black, 0 0 25px black, 0 0 50px black, 0 0 100px black;
+}
+
+.btn {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #03e9f4;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: ease-in-out .5s;
+    margin-top: 40px;
+    letter-spacing: 4px
+}
+
+.btn:hover {
+    background: #03e9f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4;
+}

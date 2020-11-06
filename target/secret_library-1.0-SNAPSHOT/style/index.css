@@ -1,0 +1,137 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    background: linear-gradient(#141e30, #243b55) center/ cover fixed no-repeat;
+}
+
+.box {
+    position: absolute;
+    width: 80%;
+    top: 40%;
+    left: 50%;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, .5);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+    border-radius: 10px;
+    color: white;
+}
+
+.btn {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #03e9f4;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: ease-in-out .5s;
+    margin-top: 40px;
+    letter-spacing: 4px
+}
+
+.btn:hover {
+    background: #03e9f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4;
+}
+
+#bookList,
+#readersList {
+    display: none;
+}
+
+form .user-box input {
+    width: 70%;
+    padding: 5px 0;
+    font-size: 16px;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+form .user-box input,
+form .user-box a {
+    color: #fff;
+    transition: ease-in-out 0.5s;
+}
+
+form .user-box a:hover {
+    text-shadow: 0 0 5px #03e9f4, 0 0 5px #03e9f4, 0 0 30px #03e9f4, 0 0 10px #03e9f4;
+}
+
+table {
+    border-spacing: 5px;
+    border-radius: 13px;
+    border: 1px solid #6cf;
+    border-collapse: collapse;
+    display: block;
+    overflow-y: scroll;
+    max-height: 180px;
+    min-width: 50%;
+    max-width: 90%;
+}
+
+thead {
+    overflow: auto;
+    width: 100%;
+}
+
+tbody {
+    max-height: 150px;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+th,
+td {
+    padding: 10px 20px;
+}
+
+th {
+    font-weight: normal;
+    font-size: 13px;
+    text-transform: uppercase;
+    border-right: 1px solid #0865c2;
+    border-top: 1px solid #0865c2;
+    border-left: 1px solid #0865c2;
+    border-bottom: 1px solid #fff;
+}
+
+th a {
+    color: #039;
+    transition: ease-in-out 0.3s;
+}
+
+td {
+    border-right: 1px dashed #6cf;
+}
+
+td,
+td a {
+    color: #669;
+    transition: ease-in-out .5s;
+}
+
+td a:hover,
+th a:hover {
+    text-decoration: none;
+    color: #330867;
+    text-shadow: 0 0 5px white, 0 0 5px white, 0 0 30px white, 0 0 70px white;
+}

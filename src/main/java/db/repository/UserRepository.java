@@ -22,13 +22,7 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
             ResultSet resultSet = statement.executeQuery(sql);
 
             if (resultSet.next()) {
-                /*userItem = new UserModel(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getString("email"),
-                        resultSet.getString("password"),
-                        resultSet.getString("list")
-                );*/
+
                 userItem = new UserModel.UserBuilder(resultSet.getString("name"))
                         .withId(resultSet.getInt("id"))
                         .withEmail(resultSet.getString("email"))
@@ -55,13 +49,7 @@ public class UserRepository extends ConnectDb implements SqlInterface<UserModel>
             ResultSet resultSet = statement.executeQuery(sql);
 
             if (resultSet.next()) {
-                /*userItem = new UserModel(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getString("email"),
-                        resultSet.getString("password"),
-                        resultSet.getString("list")
-                );*/
+
                 userItem = new UserModel.UserBuilder(resultSet.getString("name"))
                         .withId(resultSet.getInt("id"))
                         .withEmail(resultSet.getString("email"))
